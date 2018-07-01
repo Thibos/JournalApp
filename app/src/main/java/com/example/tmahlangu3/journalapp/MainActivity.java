@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth =FirebaseAuth.getInstance();
         loginButton =(Button)findViewById(R.id.loginbuttonEt);
-
         createActButton =(Button)findViewById(R.id.loginCreateAccount);
         createActButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,14 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 mUser = firebaseAuth.getCurrentUser();
                 if(mUser !=null){
                     Toast.makeText(getApplicationContext(),"Signed In",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(MainActivity.this,PostListActivity.class));
+                    startActivity(new Intent(MainActivity.this,NotesListActivity.class));
                     finish();
                 }else{
                     Toast.makeText(getApplicationContext(),"Not Signed In",Toast.LENGTH_LONG).show();
                 }
             }
         };
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,10 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 }else{
 
                 }
-
             }
         });
-
     }
     private void login(String email, String pwd) {
         mAuth.signInWithEmailAndPassword(email,pwd)
@@ -83,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                        if(task.isSuccessful()){
                            Toast.makeText(MainActivity.this, "signInWithEmail:success", Toast.LENGTH_SHORT).show();
                            mUser =mAuth.getCurrentUser();
-                           startActivity(new Intent(MainActivity.this,PostListActivity.class));
+                           startActivity(new Intent(MainActivity.this,NotesListActivity.class));
                            finish();
                        }else{
                            Toast.makeText(MainActivity.this, "signInWithEmail:failure", Toast.LENGTH_SHORT).show();
@@ -91,14 +87,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
     @Override
     protected void onStart() {
         super.onStart();
         //check if user is signed in and update UI
         mAuth.addAuthStateListener(mAuthListener);
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-
     }
 
     @Override

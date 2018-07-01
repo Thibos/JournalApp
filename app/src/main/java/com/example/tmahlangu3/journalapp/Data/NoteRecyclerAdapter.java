@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,12 +16,12 @@ import com.squareup.picasso.Picasso;
 import java.util.Date;
 import java.util.List;
 
-public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.ViewHolder> {
+public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder> {
 
     private Context context;
     private List<Blog> blocList;
 
-    public BlogRecyclerAdapter(Context context, List<Blog> blocList) {
+    public NoteRecyclerAdapter(Context context, List<Blog> blocList) {
         this.context = context;
         this.blocList = blocList;
     }

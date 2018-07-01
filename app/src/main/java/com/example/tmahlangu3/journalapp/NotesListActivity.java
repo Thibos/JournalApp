@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.tmahlangu3.journalapp.Data.BlogRecyclerAdapter;
+import com.example.tmahlangu3.journalapp.Data.NoteRecyclerAdapter;
 import com.example.tmahlangu3.journalapp.Model.Blog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,16 +25,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PostListActivity extends AppCompatActivity {
+public class NotesListActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private FirebaseDatabase mDatabase;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
     private RecyclerView recyclerView;
-    private BlogRecyclerAdapter blogRecyclerAdapter;
+    private NoteRecyclerAdapter noteRecyclerAdapter;
     private List<Blog> blogList;
     private ProgressDialog mProgress;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +63,10 @@ public class PostListActivity extends AppCompatActivity {
                 Blog blog =dataSnapshot.getValue(Blog.class);
                 blogList.add(blog);
                 Collections.reverse(blogList);
-                blogRecyclerAdapter = new BlogRecyclerAdapter(PostListActivity.this,blogList);
-                recyclerView.setAdapter(blogRecyclerAdapter);
-                blogRecyclerAdapter.notifyDataSetChanged();
+                noteRecyclerAdapter = new NoteRecyclerAdapter(NotesListActivity.this,blogList);
+                recyclerView.setAdapter(noteRecyclerAdapter);
+                noteRecyclerAdapter.notifyDataSetChanged();
                 mProgress.dismiss();
-
-
-
             }
 
             @Override
@@ -106,20 +102,15 @@ public class PostListActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.action_add:
                 if(mUser !=null && mAuth !=null){
-                    startActivity(new Intent(PostListActivity.this,AddPostActivity.class));
-
-
+                    startActivity(new Intent(NotesListActivity.this,AddNotesActivity.class));
                 }
                 break;
             case R.id.action_signout:
                 if(mUser !=null && mAuth !=null){
                     mAuth.signOut();
-                    startActivity(new Intent(PostListActivity.this,MainActivity.class));
+                    startActivity(new Intent(NotesListActivity.this,MainActivity.class));
                     finish();
-
-
                 }
-
         }
         return super.onOptionsItemSelected(item);
     }

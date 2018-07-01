@@ -1,8 +1,10 @@
 package com.example.tmahlangu3.journalapp;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,9 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.tmahlangu3.journalapp.Model.Blog;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +28,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddPostActivity extends AppCompatActivity {
+public class AddNotesActivity extends AppCompatActivity {
     private Button mSubmitButton;
     private ImageButton mPostImage;
     private EditText mPostTitle;
@@ -55,7 +55,6 @@ public class AddPostActivity extends AppCompatActivity {
         mPostImage = (ImageButton)findViewById(R.id.imageButton);
         mPostTitle = (EditText)findViewById(R.id.postTitleEt);
         mPostDesc = (EditText)findViewById(R.id.descriptionEt);
-
         mPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +64,6 @@ public class AddPostActivity extends AppCompatActivity {
             }
         });
 
-
-
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,11 +71,6 @@ public class AddPostActivity extends AppCompatActivity {
                 startPosting();
             }
         });
-
-
-
-
-
     }
 
     @Override
@@ -87,8 +79,6 @@ public class AddPostActivity extends AppCompatActivity {
         if(requestCode == GALLERY_CODE && resultCode==RESULT_OK){
             mImageUrl=data.getData();
             mPostImage.setImageURI(mImageUrl);
-
-
         }
     }
 
@@ -118,21 +108,30 @@ public class AddPostActivity extends AppCompatActivity {
                            dataToSave.put("userid",mUser.getUid());
                            newPost.setValue(dataToSave);
                            mProgress.dismiss();
-                           startActivity(new Intent(AddPostActivity.this,PostListActivity.class));
+                           startActivity(new Intent(AddNotesActivity.this,NotesListActivity.class));
                            finish();
-
-
                        }
                    });
-                   //String downloadUrl = taskSnapshot.getStorage().getDownloadUrl().toString();
-
-
-
-
 
                }
            });
 
+
+        }else{
+            mProgress.dismiss();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Oops");
+            alertDialogBuilder.setMessage("Make Sure You Put In Your The Title,Description & Image");
+            alertDialogBuilder.setPositiveButton("yes",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Toast.makeText(getApplicationContext(),"Try Again",Toast.LENGTH_LONG).show();
+                        }
+                    });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+            Toast.makeText(getApplicationContext(),"Failed",Toast.LENGTH_LONG).show();
 
         }
 

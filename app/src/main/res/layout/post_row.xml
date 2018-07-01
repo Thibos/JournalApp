@@ -35,6 +35,7 @@
         android:padding="10dp"
         android:text="Post Description"
         android:id="@+id/postTextList"
+        android:inputType="textMultiLine"
         />
     <TextView
         android:layout_width="match_parent"

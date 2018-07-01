@@ -62,14 +62,15 @@
         android:background="@drawable/input_outline"
         android:ems="10"
         android:hint="@string/post_description"
-        android:inputType="textPersonName"
+        android:inputType="textLongMessage"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postTitleEt"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.171"
+        />
 
     <Button
         android:id="@+id/submitPost"

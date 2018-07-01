@@ -33,7 +33,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth =FirebaseAuth.getInstance();
         loginButton =(Button)findViewById(R.id.loginbuttonEt);
+
         createActButton =(Button)findViewById(R.id.loginCreateAccount);
+        createActButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,CreateAccountActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
         emailField=(EditText)findViewById(R.id.loginEmailEt);
         passwordField =(EditText)findViewById(R.id.loginPasswordEt);
         mAuthListener = new FirebaseAuth.AuthStateListener() {

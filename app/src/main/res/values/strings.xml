@@ -8,4 +8,6 @@
     <string name="post_description">Post Description</string>
     <string name="posTtitle">Post Title..</string>
     <string name="submit_text">Submit</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
 </resources>
